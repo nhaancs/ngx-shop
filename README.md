@@ -2,7 +2,7 @@
 
 A Food shop app built with Angular and Firebase. This project is for learning purpose only. Demo: [https://ngx-shop.web.app](https://ngx-shop.web.app)
 
-This project is based on the final project of [The Complete Angular Course Beginner to Advanced](https://udemy.com/course/the-complete-angular-master-class) course with updated on features and libraries.
+This project is based on the final project of [The Complete Angular Course Beginner to Advanced](https://udemy.com/course/the-complete-angular-master-class) course with updated features and libraries.
 
 ## Getting started
 
