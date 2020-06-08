@@ -14,7 +14,7 @@ export class AppUser {
         model.email = data.email
         // this line is for demo pupose only
         // in realife you need to set admin role manually
-        model.isAdmin = true
+        // model.isAdmin = true
         return model
     }
 
