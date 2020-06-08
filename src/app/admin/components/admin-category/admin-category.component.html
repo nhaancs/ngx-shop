@@ -1,0 +1,25 @@
+<p>
+    <a routerLink="/admin/category/new" class="btn btn-lg btn-primary">New Category</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of categories$ | async; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{c.key}}</td>
+            <td>{{c.name}}</td>
+            <td>
+                <a [routerLink]="['/admin/category', c.key]" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>

@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-6">
+        <h3>{{id ? 'Edit Product' : 'Add Product'}}</h3>
+        <form #f="ngForm" (ngSubmit)="f.valid && save(f.value)">
+            <div class="form-group">
+                <label>Title</label>
+                <input 
+                    [(ngModel)]="product.title"
+                    name="title" 
+                    type="text" 
+                    class="form-control"
+                    required
+                    #title="ngModel"
+                    >
+                <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                    <div *ngIf="title.errors?.required">Title is required.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input 
+                    [(ngModel)]="product.price"
+                    name="price" 
+                    type="number" 
+                    class="form-control"
+                    required
+                    [gt]="0"
+                    #price="ngModel"
+                    >
+        
+                <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.errors?.required">Price is required.</div>
+                    <div *ngIf="price.errors?.gt">Price must be greater than 0.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select 
+                    [(ngModel)]="product.category" 
+                    name="category" 
+                    class="form-control"
+                    required
+                    #category="ngModel"
+                    >
+                    <option value=""></option>
+                    <option *ngFor="let c of categories$ | async" [value]="c.key">
+                        {{c.name}}
+                    </option>
+                </select>
+                <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+                    <div *ngIf="category.errors?.required">Category is required.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input 
+                    [(ngModel)]="product.imageUrl" 
+                    name="imageUrl" 
+                    type="text" 
+                    class="form-control"
+                    required
+                    url
+                    #imageUrl="ngModel"
+                    >
+                <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                    <div *ngIf="imageUrl.errors?.required">Image URL is required.</div>
+                    <div *ngIf="imageUrl.errors?.url">Invalid URL.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-right">
+                    <button 
+                        class="btn btn-lg btn-link"
+                        type="button"
+                        (click)="delete()"
+                        *ngIf="id"
+                        >Delete</button>
+                </div>
+                <div class="col-6">
+                    <button 
+                        type="submit" 
+                        class="btn btn-lg btn-primary btn-block"
+                        [disabled]="f.invalid"
+                        >Save</button> 
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h3>Preview</h3>
+        <app-product-card [product]="product" [showActions]="false"></app-product-card>
+    </div>
+</div>
+

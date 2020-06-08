@@ -1,0 +1,62 @@
+<h1>Shopping Cart</h1>
+<ng-container *ngIf="cart$ | async as cart">
+    <div class="row">
+        <div class="col-12">
+            <p>
+                You have {{cart.totalItemsCount}} items in your shopping cart.
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-right">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cart.items">
+                        <td>
+                            <img 
+                                [src]="item.imageUrl" 
+                                class="img-fluid rounded"
+                                style="width: 50px; height: 50px; object-fit: cover;"
+                                >
+                        </td>
+                        <td>{{item.title}}</td>
+                        <td>
+                            <app-product-quantity
+                                [product]="item"
+                                [shoppingCart]="cart"
+                                ></app-product-quantity>
+                        </td>
+                        <td class="text-right">{{item.totalPrice | currency:'USD'}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-right">{{cart.totalPrice | currency:'USD'}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-2"></div>
+
+        <div class="col-10 text-right">
+            <ng-container *ngIf="cart.items.length">
+                <button 
+                    class="btn btn-link"
+                    (click)="clearCart()"
+                    >Clear Shopping Cart</button>
+                <a 
+                    class="btn btn-lg btn-primary"
+                    routerLink="/check-out"
+                    >Check Out</a>
+            </ng-container>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</ng-container>

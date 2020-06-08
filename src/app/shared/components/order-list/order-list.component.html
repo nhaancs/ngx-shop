@@ -1,0 +1,30 @@
+<ngx-datatable
+  class="material"
+  rowHeight="auto"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [limit]="10"
+  [columns]="columns"
+  [rows]="orders"
+  >
+  <ngx-datatable-column name="Date Placed" sortable="false" [prop]="'datePlaced'">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{value | date}} 
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column 
+    *ngFor="let col of columns" 
+    [prop]="col.prop"
+    [name]="col.name"
+    >
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Actions" sortable="false">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <button 
+        class="btn btn-sm btn-primary"
+        (click)="viewOrderDetail(row)"
+        >View</button> 
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

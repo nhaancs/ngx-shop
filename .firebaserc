@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ngx-shop"
+  },
+  "targets": {
+    "ngx-shop": {
+      "hosting": {
+        "ngx-shop": [
+          "ngx-shop"
+        ]
+      }
+    }
+  }
+}
