@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { AuthGuardService } from 'shared/services/auth-guard.service';
 import { SharedModule } from 'shared/shared.module';
-import { firebaseConfigs } from 'src/environments/firebase-configs';
+import { firebaseConfig } from 'src/environments/firebase-configs';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,7 @@ import { ShoppingModule } from './shopping/shopping.module';
     ShoppingModule,
     CoreModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfigs),
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   declarations: [
     AppComponent,
