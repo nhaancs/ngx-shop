@@ -15,7 +15,7 @@ import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     SharedModule,
     AdminModule,
     ShoppingModule,
