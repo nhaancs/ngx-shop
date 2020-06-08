@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "public": "dist/ngx-shop",
+      "public": "dist/ngx-shop/browser",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -16,7 +16,7 @@
     },
     {
       "target": "ngx-shop",
-      "public": "dist/ngx-shop",
+      "public": "dist/ngx-shop/browser",
       "ignore": [
         "firebase.json",
         "**/.*",
