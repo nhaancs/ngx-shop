@@ -10,18 +10,24 @@ import { ShoppingCartItem } from 'shared/models/shopping-cart-item';
 export class ShoppingCartService {
   private itemsRef: AngularFireList<any>;
 
+  /**
+   * We may use ShoppingCartService in multiple places on the same page. 
+   * For example in the navigation and the product component on home.
+   * This property is for prevent to create multiple carts at the same time.
+   */
+  private cartId: Promise<string>
+
   constructor(private afDatabase: AngularFireDatabase) { 
-    this.itemsRef = this.afDatabase.list('/shopping-carts')
+    this.itemsRef = this.afDatabase.list('/shopping-carts');
+    this.cartId = this.getOrCreateCartId()
   }
 
   async clearCart(): Promise<void> {
-    let cartId = await this.getOrCreateCartId()
-    return this.afDatabase.object('/shopping-carts/' + cartId + '/items').remove()
+    return this.afDatabase.object('/shopping-carts/' + await this.cartId + '/items').remove()
   }
 
   async getCart(): Promise<Observable<ShoppingCart>> {
-    let cartId = await this.getOrCreateCartId()
-    return this.afDatabase.object('/shopping-carts/' + cartId)
+    return this.afDatabase.object('/shopping-carts/' + await this.cartId)
     .valueChanges()
     .pipe(map(this.toModel))
   }
@@ -40,6 +46,7 @@ export class ShoppingCartService {
 
   private async getOrCreateCartId(): Promise<string> {
     let cartId = localStorage.getItem('cartId')
+
     if (!cartId) {
       let result = await this.create()
       localStorage.setItem('cartId', result.key)
@@ -50,8 +57,7 @@ export class ShoppingCartService {
   }
   
   private async updateItem(product: Product, change: number) {
-    let cartId = await this.getOrCreateCartId()
-    let cartItemRef = this.getCartItemRef(cartId, product.key)
+    let cartItemRef = this.getCartItemRef(await this.cartId, product.key)
 
     cartItemRef.valueChanges()
     .pipe(take(1))

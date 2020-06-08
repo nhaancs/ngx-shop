@@ -39,10 +39,6 @@ export class ProductComponent implements OnInit {
       } else {
         this.products$ = this.productService.getAll()
       }
-
-      this.products$.subscribe(products => {
-        
-      })
     })
   }
 }

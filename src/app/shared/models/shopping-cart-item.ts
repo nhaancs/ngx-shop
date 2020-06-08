@@ -18,7 +18,7 @@ export class ShoppingCartItem {
     static toRequest(data: Partial<ShoppingCartItem>): Partial<ShoppingCartItem> {
         let model: any = {}
         model.key = data.key
-        model.title = data.title
+        model.title = data.title 
         model.imageUrl = data.imageUrl
         model.price = data.price
         model.quantity = data.quantity
