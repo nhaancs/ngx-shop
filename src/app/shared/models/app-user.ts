@@ -12,6 +12,9 @@ export class AppUser {
         let model: any = {}
         model.name = data.displayName
         model.email = data.email
+        // this line is for demo pupose only
+        // in realife you need to set admin role manually
+        model.isAdmin = true
         return model
     }
 
